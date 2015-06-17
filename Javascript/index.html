@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	
+	<script type="text/javascript" src="markov.js"></script>
+	<script type="text/javascript">
+		window.onload = function( ){
+			var markov = new Markov( test_text );
+			var generatedText =  markov.generateMarkovText( ).trim( );
+
+			var element = document.getElementById( 'main' );
+			element.innerHTML = generatedText[0].toUpperCase() + generatedText.slice(1) + '.';
+		};
+	</script>
+
+</head>
+<body>
+
+	<main id="main"></main>
+</body>
+</html>
