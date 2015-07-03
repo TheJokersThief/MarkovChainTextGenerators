@@ -68,7 +68,7 @@ func (markov *Markov) storeProbability( ){
 		for i := 0; i < wordSize - 2; i++ {
 			// Uses first and second word as a key, simulating probablity
 			// by appending all succeeding words to an array
-			key := markov.words[ i ] + "," + markov.words[ i + 1 ]
+			key := markov.words[ i ] + ">>" + markov.words[ i + 1 ]
 			markov.keys = append( markov.keys, key )
 			markov.store[ key ] = append( markov.store[ key ], markov.words[ i + 2 ] )
 		}
@@ -88,7 +88,7 @@ func (markov Markov) generateMarkovText( wordLimit int ) string{
 		key := markov.keys[ randomInt ]
 
 		for i := 0; i < wordLimit; i++ {
-			words := strings.Split( key, "," )
+			words := strings.Split( key, ">>" )
 			output += words[ 0 ] + " "
 
 			keyPossibilities := len( markov.store[key] )
@@ -96,7 +96,7 @@ func (markov Markov) generateMarkovText( wordLimit int ) string{
 				// Randomly choose a possibility from the key's position in the store
 				rand.Seed( time.Now().UnixNano() )
 				randomInt = rand.Intn( len( markov.store[key] ) )
-				key = words[1] + "," + markov.store[key][randomInt]
+				key = words[1] + ">>" + markov.store[key][randomInt]
 			} else{
 				// If the key has 0 possibilities, randomly choose a new key to work with
 				rand.Seed( time.Now().UnixNano() )

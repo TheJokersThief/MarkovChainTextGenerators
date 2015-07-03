@@ -60,12 +60,12 @@ function Markov( file ){
 		key = storeKeys[ storeKeys.length * Math.random() << 0];
 		console.log( key );
 		for (var i = 0; i < wordLimit; i++) {
-			var words = key.split(',');
+			var words = key.split('>>');
 			output += ' ' + words[0];
 
 			if( key in markov.store ){
 				var randomInt = ( storeKeys.length * Math.random() << 0 );
-				key = words[1] + ',' + markov.store[ key ];
+				key = words[1] + '>>' + markov.store[ key ];
 			} else {
 				key = storeKeys[ storeKeys.length * Math.random() << 0];
 			}

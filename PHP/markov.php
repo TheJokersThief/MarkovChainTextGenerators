@@ -46,7 +46,7 @@ class Markov{
 				// We'll use a comma-separated string as key 
 				// and explode it later rather than messing 
 				// with the SplObjectStorage class
-				$key = $this->words[ $i ] .','. $this->words[ $i + 1 ];
+				$key = $this->words[ $i ] .'>>'. $this->words[ $i + 1 ];
 				$this->store[ $key ][] = $this->words[ $i + 2 ];
 			}
 		}
@@ -69,7 +69,7 @@ class Markov{
 				// For until we reach the word limit
 
 				// Extract our individual words from the key and output the first
-				$words = explode(',', $key);
+				$words = explode('>>', $key);
 				$output .= ' '.$words[ 0 ];
 
 				if( isset( $this->store[ $key ] ) ){
@@ -77,7 +77,7 @@ class Markov{
 
 					// Randomly select one of the new words and get a new key
 					$randomInteger = mt_rand( 0, count( $this->store[$key] ) - 1 );
-					$key = $words[ 1 ].','.$this->store[ $key ][ $randomInteger ];
+					$key = $words[ 1 ].'>>'.$this->store[ $key ][ $randomInteger ];
 				} else {
 					// If it doesn't exist, grab another random one
 					$key = array_rand( $this->store );
